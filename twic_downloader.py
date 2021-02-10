@@ -2,7 +2,7 @@ import re
 import urllib
 import urllib.request
 import zipfile
-import configparser
+import os
 
 
 def read_webpage():
@@ -32,6 +32,7 @@ def download_games():
     # handle zip file
     with zipfile.ZipFile(input_zip_filename, "r") as zip_ref:
         zip_ref.extractall()
+        zip_ref.extractall("PGN")
         input_pgn_filename = zip_ref.namelist()[0]
 
     return input_pgn_filename
@@ -42,7 +43,7 @@ def download_games():
 
 def is_rating_relevant(pgn_game):
 
-    cfg = open("python/local/rating.cfg", "r")
+    cfg = open("config/rating.cfg", "r")
     rating = cfg.read()
     cfg.close()
     rating_threshold = int(rating)
@@ -74,7 +75,7 @@ def is_rating_relevant(pgn_game):
 
 def is_eco_relevant(pgn_game):
 
-    cfg = open("python/local/eco.cfg", "r")
+    cfg = open("config/eco.cfg", "r")
     lista = cfg.read()
     cfg.close()
     eco = lista.split()
@@ -107,7 +108,7 @@ def is_game_relevant(pgn_game):
 
 def main():
     # define names of input and output files
-    output_pgn_filename = "relevant.pgn"
+    output_pgn_filename = "PGN/relevant.pgn"
 
     input_pgn_filename = download_games()
     all_games = open(input_pgn_filename, "r").read()
@@ -129,6 +130,9 @@ def main():
     # with zipfile.ZipFile('teste.zip', 'a') as twiczip:
     #    twiczip.write(output_pgn_filename)
     #    twiczip.write(input_pgn_filename)
+    if os.path.exists(input_pgn_filename):
+        os.remove(input_pgn_filename)
+        os.remove("last_twic.zip")
 
 
 main()
