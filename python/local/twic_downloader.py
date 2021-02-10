@@ -2,6 +2,7 @@ import re
 import urllib
 import urllib.request
 import zipfile
+import configparser
 
 
 def read_webpage():
@@ -36,13 +37,21 @@ def download_games():
     return input_pgn_filename
 
 
+# print("file as dic: ", read_config("config.cfg"))
+
+
 def is_rating_relevant(pgn_game):
 
+    cfg = open("python/local/rating.cfg", "r")
+    rating = cfg.read()
+    cfg.close()
+    rating_threshold = int(rating)
     # define rating relevance threshold
     # rating_threshold = 2300
+    # rating_threshold = cfg.get("A", "rating")
     # rating = int(input("Qual Rating mínimo ? Ex.: 2300 : "))
     # rating_threshold = rating
-    rating_threshold = int(input("Qual Rating mínimo ? Ex.: 2300 : "))
+    # rating_threshold = int(input("Qual Rating mínimo ? Ex.: 2300 : "))
 
     # find both ratings in the game
     test = re.findall(r"\n\[.*Elo.*", pgn_game)
@@ -65,13 +74,19 @@ def is_rating_relevant(pgn_game):
 
 def is_eco_relevant(pgn_game):
 
+    cfg = open("python/local/eco.cfg", "r")
+    lista = cfg.read()
+    cfg.close()
+    eco = lista.split()
+    my_repertoire_list = eco
+
     # define list of interesting ECO codes
     # my_repertoire_list = ["C26", "C28", "C29"]
-    eco = input(
-        "Digite o código ECO das aberturas separados por espaço. Ex.: C99 B30 A01 C29: "
-    )
-    ecolist = eco.split()
-    my_repertoire_list = ecolist
+    # eco = input(
+    #    "Digite o código ECO das aberturas separados por espaço. Ex.: C99 B30 A01 C29: "
+    # )
+    # ecolist = eco.split()
+    # my_repertoire_list = ecolist
 
     # join them into a regular expression
     my_repertoire_re = re.compile("|".join(my_repertoire_list))
