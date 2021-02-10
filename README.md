@@ -19,7 +19,9 @@ Setup
 =====
 
 Caso queira rodar esse programa no WINDOWS, basta baixar o arquivo win.zip que está disponível em:
-pararara
+
+https://github.com/cccarv/twictool/blob/main/win/win.zip
+
 descompactar e realizar a configuração conforme descrito abaixo.
 
 
