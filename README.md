@@ -18,6 +18,11 @@ ECO --> eco.cfg
 Setup
 =====
 
+Caso queira rodar esse programa no WINDOWS, basta baixar o arquivo win.zip que está disponível em:
+pararara
+descompactar e realizar a configuração conforme descrito abaixo.
+
+
 O arquivo rating.cfg deve conter apenas 1 linha especificando o rating base dos jogadores para a seleção das partias de interesse
 O arquivo eco.cfg pode ter quantos códigos ECO o usuário quiser, de preferência, coloqu 1 código por linha
 
@@ -25,4 +30,4 @@ O arquivo eco.cfg pode ter quantos códigos ECO o usuário quiser, de preferênc
 Running
 =======
 
-$ python select_twic.py
+Para executar no windows usando o arquivo executável, basta executar o twic_downloader.exe
